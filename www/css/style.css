@@ -1,1 +1,17 @@
 /* Empty. Add your own CSS if you like */
+ @media screen and (orientation:portrait) { 
+	.potrait{
+		display: block;
+	}
+	.landscape{
+		display: none;
+	}
+ }
+ @media screen and (orientation:landscape) { 
+	.potrait{
+		display: none;
+	}
+	.landscape{
+		display: block;
+	}
+ }

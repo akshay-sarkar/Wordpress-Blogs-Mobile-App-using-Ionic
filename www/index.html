@@ -31,7 +31,8 @@
       <ion-content>
       <ion-refresher pulling-text="Pull to refresh..." on-refresh="reloadBlogs()">
       </ion-refresher>
-        <ion-list>
+        
+        <ion-list class="potrait">
           <ion-item ng-repeat="item in blogs" class="item-thumbnail-left item-avatar" ng-click="showBlog($index)">
             <img ng-src="{{item.author.avatar_URL}}" alt=""/>
             <h2 ng-bind-html="item.title"></h2>
@@ -41,6 +42,29 @@
             </ion-option-button>
           </ion-item>
         </ion-list>
+
+        <div class="list card landscape" ng-repeat="item in blogs" ng-click="showBlog($index)">
+            <div class="item item-avatar">
+                <img data-ng-src="{{item.author.avatar_URL}}" alt="">
+                <h2 data-ng-bind-html="item.title"></h2>
+                <p> {{item.author.name}} </p>
+            </div>
+            <div class="item item-body">
+                <img data-ng-if="b.featured_image" data-ng-src="{{ item.featured_image }}" alt="" class="full-image">            
+                <p data-ng-bind-html="item.excerpt"></p>
+            </div>
+            <div class="item tabs tabs-secondary tabs-icon-left">
+               <a class="tab-item" data-ng-click="showBlog($index)">
+                   <i class="icon ion-ios-book"></i>
+                   Read
+               </a>
+                <a class="tab-item" data-ng-click="shareBlog($index)">
+                    <i class="icon ion-share"></i>
+                    Share
+                </a>
+            </div>
+        </div> 
+
         <ion-infinite-scroll  on-infinite="loadMoreBlogs()" ng-if="deviceReady">
         </ion-infinite-scroll>
       </ion-content>
