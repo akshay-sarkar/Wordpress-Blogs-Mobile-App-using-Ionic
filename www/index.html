@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <meta http-equiv="Content-Security-Policy" content="default-src *;script-src *">
+    <title></title>
+
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
+
+    <!-- your app's js -->
+    <script src="js/app.js"></script>
+  </head>
+  <body ng-app="ionicApp">
+
+    <ion-pane ng-controller="mainCtrl">
+      <ion-header-bar class="bar-dark">
+        <h1 class="title">Ionic Wordpress Blog</h1>
+      </ion-header-bar>
+      <ion-content>
+      <ion-refresher pulling-text="Pull to refresh..." on-refresh="reloadBlogs()">
+      </ion-refresher>
+        <ion-list>
+          <ion-item ng-repeat="item in blogs" class="item-thumbnail-left item-avatar" ng-click="showBlog($index)">
+            <img ng-src="{{item.author.avatar_URL}}" alt=""/>
+            <h2 ng-bind-html="item.title"></h2>
+            <p>{{item.author.name}}</p>
+            <ion-option-button class="button-assertive" ng-click="shareBlog($index)">
+              Share Blog
+            </ion-option-button>
+          </ion-item>
+        </ion-list>
+        <ion-infinite-scroll  on-infinite="loadMoreBlogs()" ng-if="deviceReady">
+        </ion-infinite-scroll>
+      </ion-content>
+    </ion-pane>
+  </body>
+</html>
